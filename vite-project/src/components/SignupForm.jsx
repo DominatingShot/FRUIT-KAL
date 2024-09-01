@@ -13,18 +13,30 @@ const SignupForm = ({ setIsAuthenticated }) => {
     e.preventDefault();
 
     try {
-      // Send signup request to Flask backend
-      const response = await axios.post('http://127.0.0.1:5000/register', { email, password });
+      // Send signup request to Flask backend with name, email, and password
+      const response = await axios.post('http://127.0.0.1:5000/register', { 
+        name,
+        email,
+        password 
+      });
 
-      // If signup is successful, set authentication status and navigate to the dashboard
+      // If signup is successful, save the userId and navigate to the dashboard
       if (response.status === 201) {
+        const { user_id } = response.data;
+
+        // Save the userId in localStorage
+        localStorage.setItem('userId', user_id);
+
+        // Set authentication status
         setIsAuthenticated(true);
+
+        // Navigate to the dashboard
         navigate('/dashboard');
       }
     } catch (err) {
       // Handle error (e.g., user already exists)
       if (err.response) {
-        setError(err.response.data.message);
+        setError(err.response.data.message || 'Registration failed. Please try again.');
       } else {
         setError('An error occurred. Please try again.');
       }

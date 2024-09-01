@@ -1,10 +1,10 @@
 import React from 'react';
 
-const NutritionCard = ({ name, calories, protein, carbs, fat }) => {
+const NutritionCard = ({ foodName, calories, protein, carbs, fat }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md flex justify-between items-center">
       <div>
-        <h3 className="font-bold text-lg">{name}</h3>
+        <h3 className="font-bold text-lg">{foodName}</h3>
         <p className="text-gray-600">{calories} kcal</p>
       </div>
       <div className="flex space-x-4 text-gray-700">

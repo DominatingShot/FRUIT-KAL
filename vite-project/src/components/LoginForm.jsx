@@ -17,7 +17,15 @@ const LoginForm = ({ setIsAuthenticated }) => {
 
       // If login is successful, set authentication status and navigate to the dashboard
       if (response.status === 200) {
+        const { user_id } = response.data;
+
+        // Store the user ID in localStorage or sessionStorage
+        localStorage.setItem('userId', user_id);
+
+        // Set authentication status
         setIsAuthenticated(true);
+
+        // Navigate to the dashboard
         navigate('/dashboard');
       }
     } catch (err) {

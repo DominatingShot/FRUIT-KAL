@@ -5,7 +5,7 @@ from flask_bcrypt import Bcrypt
 from .config import Config
 from flask_cors import CORS
 
-db = SQLAlchemy()
+db = SQLAlchemy()  # Create SQLAlchemy instance
 migrate = Migrate()
 bcrypt = Bcrypt()
 
@@ -14,11 +14,11 @@ def create_app():
     CORS(app)
     app.config.from_object(Config)
 
-    db.init_app(app)
+    db.init_app(app)  # Initialize the app with the db instance
     migrate.init_app(app, db)
     bcrypt.init_app(app)
 
     from .routes import auth
-    app.register_blueprint(auth)  # Register routes from routes.py
+    app.register_blueprint(auth)  # Register blueprint
 
     return app
